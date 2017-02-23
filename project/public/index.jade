@@ -1,0 +1,36 @@
+doctype html
+html(ng-app='sampleForm')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+
+        title Sample Form App
+
+        link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css')
+        link(rel='stylesheet', href='/css/style.css')
+
+        script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')
+        script(src='//connect.facebook.net/en_US/sdk.js')
+        script(src='/js/app.js')
+
+    body(ng-controller='appController')
+        .container
+            .card.card-container
+                img.profile-img-card(src='//ssl.gstatic.com/accounts/ui/avatar_2x.png')
+                h4.form-header(ng-show='complete')
+                    | Your details
+                    br
+                    | were successfully send
+                form.form-signin(name='details', ng-submit='send(details)', ng-hide='complete')
+                    .form-group
+                        h3.form-header Enter your details
+                        input.form-control(type='name', ng-model='details.name', placeholder='First name', required='', autofocus='')
+                        input.form-control(type='surname', ng-model='details.surname', placeholder='Last name', required='', autofocus='')
+                        input.form-control(type='email', ng-model='details.email', placeholder='Email', required='')
+                        a.login-facebook(href='#', ng-click='FBLogin()', ng-hide='FBConnected')
+                            | Login to facebook
+                        button.btn.btn-lg.btn-primary.btn-block.btn-signin(type='submit', ng-disabled='loading')
+                            span.spinner(ng-show='loading')
+                                i.icon-spin.icon-refresh
+                            |  Send
